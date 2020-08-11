@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" href="../js/tmicon.jpg">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .container {
+            height: 100%;
+            width: 100%;
+            background-color: #000000;
+        }
+
+        .main {
+            height: 50%;
+            width: 50%;
+            background-color: #ffffff;
+            border-radius: 20px;
+            margin: 0 auto;
+            min-height: 150px;
+        }
+
+        .head, .boot {
+            height: 25%;
+            width: 100%;
+        }
+
+        .upload {
+            width: 70%;
+            border: 1px solid white;
+            outline: none;
+            text-align: center;
+            vertical-align: middle;
+            min-width: 100px;
+            border-radius: 5px;
+            border: 2px solid skyblue;
+        }
+
+        .upload:hover {
+            border: 2px solid deepskyblue;
+        }
+
+        .uploadbtn {
+            width: 20%;
+            border-radius: 5px;
+            outline: none;
+            border: 2px solid skyblue;
+            color: #0c10ff;
+            background-color: white;
+            float: right;
+        }
+
+        .uploadbtn:hover {
+            border: 2px solid deepskyblue;
+        }
+
+        .uploadbox {
+            width: 50%;
+            /* padding-top: 100px; */
+            /* background-color: darkcyan; */
+            margin: 0 auto;
+            min-width: 200px;
+        }
+
+        .resultbox {
+            margin-top: 20px;
+            width: 50%;
+            margin: 0 auto;
+            /* padding-top: 20px; */
+            min-width: 200px;
+        }
+
+        .resultbox input {
+            width: 100%;
+            border: 2px solid skyblue;
+            outline: none;
+            height: 40px;
+            border-radius: 10px;
+            min-width: 200px;
+        }
+
+        .resultbox input:hover {
+            border: 2px solid #5db5eb;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="head"></div>
+    <div class="main">
+        <div style="width: 100%;height: 30%;"></div>
+        <div class="uploadbox">
+            <input id="imageFile" class="upload" type="file" multiple="multiple" placeholder="请上传图片">
+            <input class="uploadbtn" type="button" value="上传" onclick="upload()"/>
+        </div>
+        <div style="width: 100%;height: 10%;"></div>
+        <div class="resultbox">
+            <input id="result" type="text" value=""/>
+        </div>
+    </div>
+    <div class="boot"></div>
+</div>
+<script src="./js/jquery.js"></script>
+<script>
+    function upload() {
+        var file = new FormData();
+        file.append("file", $('#imageFile')[0].files[0]);
+        $.ajax({
+            url: "uploadFile",
+            type: 'POST',
+            cache: false,
+            data: file,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $("#result").val(data.path);
+                $("#result").focus();
+                console.log(data.Exception)
+            }
+        }).done(function (res) {
+        }).fail(function (res) {
+        });
+    }
+</script>
+</body>
+</html>

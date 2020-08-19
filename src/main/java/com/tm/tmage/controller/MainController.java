@@ -51,7 +51,8 @@ public class MainController {
                 //将文件路径替换为自定义的
                 imagePath = Paths.get(backupPath, filename);
             }
-
+            //替换路径08.18
+            imagePath = Paths.get(backupPath, filename);
             //创建文件，并将传过来的图片复制进去
             File f1 = new File(imagePath.toString());
             if (!f1.exists()) {
@@ -63,8 +64,9 @@ public class MainController {
 
             // resource = ResourceBundle.getBundle("application");
             //  String url = resource.getString("url");
-
-            result.put("path", "http://47.98.234.89:8080" + "/image/" + filename);
+             //http://localhost:8080/
+//            result.put("path", "http://47.98.234.89:8080" + "/image/" + filename);
+            result.put("path", "http://localhost:8080" + "/image/" + filename);
         } catch (Exception e) {
             result.put("Exception", e.getMessage());
         }
